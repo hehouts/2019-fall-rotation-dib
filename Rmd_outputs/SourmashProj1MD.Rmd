@@ -1,0 +1,98 @@
+---
+title: "SourmashProj1"
+author: "Hannah Houts"
+date: "November 15, 2019"
+output: 
+  html_document:
+    keep_md: yes
+    theme: spacelab
+---
+
+```{r}
+library(tidyverse)
+library(ggfortify)
+```
+
+
+
+
+
+```{r}
+# Read data into R
+comp_mat <- read.csv("CompCSVs/bacteroides_k31_genomic_comp.csv")
+
+
+#reduce csv col names
+colnames(comp_mat) <- sub("X2018.test_datasets.bacteroides.genomic.GCA_", "", colnames(comp_mat))
+colnames(comp_mat) <- sub("_genomic.fna.gz_", "", colnames(comp_mat))
+
+
+  # Set row labels
+rownames(comp_mat) <- colnames(comp_mat)
+# Transform for plotting
+comp_mat <- as.matrix(comp_mat)
+
+
+autoplot(comp_mat)
+
+#autoplot(cmdscale(eurodist, eig = TRUE))
+
+
+# Make an MDS plot
+fit <- dist(comp_mat)
+fit <- cmdscale(fit)
+plot(-fit[ , 2] ~ fit[ , 1],
+      xlab = "Dim 1",
+      ylab = "Dim 2",
+      xlim= c(-.6, .9),
+      main = "sourmash Compare MDS")
+# add labels to the plot
+text(fit[ , 2]~ fit[ , 1],
+      labels = row.names(fit),
+      pos = 4, font = 1,
+      data = fit,
+      col = c("blue", "blue",
+               "orange", "orange"))
+```
+
+
+```{r}
+ # Set row labels
+rownames(comp_mat) <- colnames(comp_mat)
+# Transform for plotting
+comp_mat <- as.matrix(comp_mat)
+# Make an MDS plot
+fit <- dist(comp_mat)
+fit <- cmdscale(fit)
+plot(-fit[ , 2] ~ fit[ , 1],
+      xlab = "Dim 1",
+      ylab = "Dim 2",
+      xlim= c(-.6, .9),
+      main = "sourmash Compare MDS")
+# add labels to the plot
+text(fit[ , 2]~ fit[ , 1],
+      labels = row.names(fit),
+      pos = 4, font = 1,
+      data = fit,
+      col = c("blue", "blue",
+               "orange", "orange"))
+```
+
+
+```{r}
+
+autoplot(comp_mat)
+#autoplot(cmdscale(eurodist, eig = TRUE))
+```
+
+```{r, eval=FALSE}
+
+
+
+for k in 7 9 12
+    do
+   for org in bacteroides gingivalis denticola
+       do
+        for mol in proteomic
+            do 
+```
