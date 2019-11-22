@@ -1,4 +1,9 @@
 2018-test_datasets
 sourmashf1000
 rotation_practice_files
-
+sm_rotation_proj/bacteroides/
+sm_rotation_proj/bacteroides/*
+sm_rotation_proj/denticola/
+sm_rotation_proj/denticola/*
+sm_rotation_proj/gingivalis/
+sm_rotation_proj/gingivalis/*
